@@ -45,14 +45,16 @@ class Bibliotheque:
     def ajouter_adherent(self, adherent):
         self.adherents.append(adherent)
         #
-    #def sauvegarde_adherent(self, nomFichier):
-        # lire depuis fichier
-        #f = open(nomFichier, 'w')
+    def sauvegarde_adherent(self, nomFichier):
+        #lire depuis fichier
+        f = open(nomFichier, 'w')
 
-        #for x in self.adherents:
-            #print(x[0])
-            #f.write(x[0] + "," + x[1] + "," + "\n")
-        #f.close()
+        for adherent in self.adherents:
+            print(adherent.nom + " " + adherent.prenom)
+            f.write(adherent.nom + "," + adherent.prenom + "," + "\n")
+        f.close()
+        nomfichier = "./fichier_adh.txt"
+        #sauvegardeAdherent(nomfichier)
     def supprimer_adherent(self, nom, prenom):
         for adherent in self.adherents:
             if adherent.nom == nom and adherent.prenom == prenom:
@@ -69,6 +71,17 @@ class Bibliotheque:
 
     def ajouter_document(self, document):
         self.documents.append(document)
+
+    def sauvegarder_doc(self, titre_livre):
+        # lire depuis fichier
+        l = open(titre_livre, 'w')
+
+        for x in self.documents:
+            print(x.titre+ " " + x.auteur)
+            l.write(x.titre + "," + x.auteur+ "," + "\n")
+        l.close()
+        nomfichier2 = "./fichier_document.txt"
+
 
     def supprimer_document(self, nom_doc):
         for document in self.documents:
@@ -106,7 +119,8 @@ class Bibliotheque:
 
 
 bibliotheque = Bibliotheque()
-
+nomfichier = "./fichier_adh.txt"
+nomfichier2 = "./fichier_document.txt"
 while True:
     print("******************************************")
     print("*         Bienvenue à votre bibliothèque *")
@@ -121,7 +135,9 @@ while True:
     print("*    7       Ajouter Emprunts            *")
     print("*    8       Retour d’un Emprunts        *")
     print("*    9       Afficher tous les Emprunts  *")
-    print("*    0      Quitter                      *")
+    print("*    0       Sauvegarder Adh             *")
+    print("*    L       Sauvegarde Livre            *")
+    print("*    Q       Quitter                     *")
     print("******************************************")
 
     choix = input("Choisissez un option : ")
@@ -194,8 +210,14 @@ while True:
 #### Afficher tous les Emprunts
     elif choix == "9":
         bibliotheque.afficher_emprunts()
-
     elif choix == "0":
+        nomfichier = "./fichier_adh.txt"
+        bibliotheque.sauvegarde_adherent(nomfichier)
+    elif choix.upper() == "L":
+        nomfichier2 = "./fichier_document.txt"
+        bibliotheque.sauvegarder_doc(nomfichier2)
+
+    elif choix == "Q":
         print("Au revoir!")
         break
     else:
