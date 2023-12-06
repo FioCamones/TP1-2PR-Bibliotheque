@@ -1,45 +1,32 @@
-import random
-import csv
-
-
 #   NOUS AVONS COMME OBJECTIF DE CRÉER UN CODE LOGIQUE POUR UNE BIBLIOTHEQUE.
 #   LA PREMIERE PARTIE CONSISTE À CRÉER NOS CLASSES
 class Document:
     def __init__(self, titre):
         self.titre = titre
 
-
 class Livre(Document):
-    def __init__(self, titre, auteur, ISBN):
+    def __init__(self, titre, auteur):
         super().__init__(titre)
         self.auteur = auteur
-        self.isbn = ISBN
-
 
 class BandeDessinee(Document):
     def __init__(self, titre, dessinateur):
         super().__init__(titre)
         self.dessinateur = dessinateur
 
-
 class Dictionnaire(Document):
     def __init__(self, titre):
         super().__init__(titre)
-
 
 class Journal(Document):
     def __init__(self, titre, date_parution):
         super().__init__(titre)
         self.date_parution = date_parution
 
-
 class Adherent:
-    def __init__(self, nom, prenom, age, num_adh):
+    def __init__(self, nom, prenom):
         self.nom = nom
         self.prenom = prenom
-        self.age = age
-        self.numadh = num_adh
-
 
 class Emprunt:
     def __init__(self, nom_adherent, prenom_adherent, livre):
@@ -56,18 +43,6 @@ class Bibliotheque:
 
     def ajouter_adherent(self, adherent):
         self.adherents.append(adherent)
-        #
-
-    def sauvegarde_adherent(self, nomFichier):
-        # lire depuis fichier
-        f = open(nomFichier, 'w')
-
-        for adherent in self.adherents:
-            print(adherent.nom + " " + adherent.prenom + " " + adherent.age + " " + adherent.numadh)
-            f.write(adherent.nom + "," + adherent.prenom + "," + adherent.age + "," + adherent.numadh + "\n")
-        f.close()
-        nomfichier = "./fichier_adh.txt"
-        # sauvegardeAdherent(nomfichier)
 
     def supprimer_adherent(self, nom, prenom):
         for adherent in self.adherents:
@@ -81,38 +56,10 @@ class Bibliotheque:
     def afficher_adherents(self):
         print("Liste des adhérents :")
         for adherent in self.adherents:
-            print(f"nom:{adherent.nom} prenom:{adherent.prenom} age:{adherent.age} numero d'adhérant:{adherent.numadh}")
+            print(f"{adherent.nom} {adherent.prenom}")
 
     def ajouter_document(self, document):
         self.documents.append(document)
-
-    def sauvegarder_doc(self, titre_livre):
-        # lire depuis fichier
-        l = open(titre_livre, 'w')
-
-        for x in self.documents:
-            print(x.titre + " " + x.auteur + " " + x.isbn)
-            l.write(x.titre + "," + x.auteur + "," + x.isbn + "\n")
-        l.close()
-        nomfichier2 = "./fichier_document.txt"
-
-    def charger_adh_depuis_fichier(self, nomFichierAdh):
-        f = open(nomFichierAdh, 'r')
-        lecture = csv.reader(f, delimiter=',')
-        for x in lecture:
-            #print(x)
-            obj = Adherent(x[0], x[1], x[2], x[3])
-            self.adherents.append(obj)
-        f.close()
-
-    def charger_doc_depuis_fichier(self, nomFichierdoc):
-        f = open(nomFichierdoc, 'r')
-        lecture = csv.reader(f, delimiter=',')
-        for x in lecture:
-            #print(x)
-            docs = Livre(x[0], x[1], x[2])
-            self.documents.append(docs)
-        f.close()
 
     def supprimer_document(self, nom_doc):
         for document in self.documents:
@@ -125,10 +72,11 @@ class Bibliotheque:
     def afficher_document(self):
         print("liste de documents :")
         for document in self.documents:
-            print(f"titre:{document.titre}  auteur:{document.auteur}  ISBN:{document.isbn}")
+            print(f"{document.titre}")
 
     def ajouter_emprunt(self, emprunt):
         self.emprunts.append(emprunt)
+
 
     def afficher_emprunts(self):
         for emprunt in self.emprunts:
@@ -136,6 +84,7 @@ class Bibliotheque:
             prenom_adherent = emprunt.prenom
             titre_livre = emprunt.livre.titre
             print(f"{nom_adherent} {prenom_adherent} a emprunté {titre_livre}")
+
 
     def retour_emprunt(self, nom_adherent, prenom_adherent, titre_livre):
         for emprunt in self.emprunts:
@@ -148,8 +97,7 @@ class Bibliotheque:
 
 
 bibliotheque = Bibliotheque()
-nomfichier = "./fichier_adh.txt"
-nomfichier2 = "./fichier_document.txt"
+
 while True:
     print("******************************************")
     print("*         Bienvenue à votre bibliothèque *")
@@ -164,41 +112,35 @@ while True:
     print("*    7       Ajouter Emprunts            *")
     print("*    8       Retour d’un Emprunts        *")
     print("*    9       Afficher tous les Emprunts  *")
-    print("*    0       Sauvegarder Adh             *")
-    print("*    L       Sauvegarde Livre            *")
-    print("*    Q       Quitter                     *")
+    print("*    0      Quitter                      *")
     print("******************************************")
 
     choix = input("Choisissez un option : ")
-    #### Ajouter adhérent
+#### Ajouter adhérent
     if choix == "1":
         nom = input("Nom de l'adhérent : ")
         prenom = input("Prénom de l'adhérent : ")
-        age = input("Quel est votre âge : ")
-        num_adh = str(random.randint(10000, 99999))
-        adherent = Adherent(nom, prenom, age, num_adh)
+        adherent = Adherent(nom, prenom)
         bibliotheque.ajouter_adherent(adherent)
 
-    #### Supprimer un adhérent
+#### Supprimer un adhérent
     elif choix == "2":
         nom = input("Nom de l'adhérent à supprimer : ")
         prenom = input("Prénom de l'adhérent à supprimer : ")
         bibliotheque.supprimer_adherent(nom, prenom)
 
-    #### Afficher tous les adhérents
+#### Afficher tous les adhérents
     elif choix == "3":
-        bibliotheque.charger_adh_depuis_fichier(nomfichier)
         bibliotheque.afficher_adherents()
 
-    #### Ajouter un document
+#### Ajouter un document
     elif choix == "4":
         type_document = input("Type de document (Livre, BandeDessinee, Dictionnaire, Journal) : ")
         titre_document = input("Titre du document : ")
 
         if type_document.lower() == "livre":
             auteur = input("Auteur du livre : ")
-            isbn = str(random.randint(10000, 99999))
-            document = Livre(titre_document, auteur, isbn)
+            document = Livre(titre_document, auteur)
         elif type_document.lower() == "bandedessinee":
             dessinateur = input("Dessinateur de la Bande Dessinée : ")
             document = BandeDessinee(titre_document, dessinateur)
@@ -209,31 +151,30 @@ while True:
             document = Journal(titre_document, date_parution)
         else:
             print("Type de document non reconnu.")
-            continue
+            continue  # Revenir au début de la boucle
 
         bibliotheque.ajouter_document(document)
 
-    #### Supprimer Document
+#### Supprimer Document
     elif choix == "5":
         titre_document = input("Titre du document à supprimer : ")
         bibliotheque.supprimer_document(titre_document)
 
-    #### Afficher tous les Documents
+#### Afficher tous les Documents
     elif choix == "6":
-        bibliotheque.charger_doc_depuis_fichier(nomfichier2)
         bibliotheque.afficher_document()
 
-    #### Ajouter Emprunts
+#### Ajouter Emprunts
     elif choix == "7":
         nom_adherent = input("Nom de l'adhérent emprunteur : ")
         prenom_adherent = input("Prénom de l'adhérent emprunteur : ")
         titre_livre = input("Titre du livre emprunté : ")
         auteur_livre = input("Auteur du livre : ")
-        emprunt = Emprunt(nom_adherent, prenom_adherent, Livre(titre_livre, auteur_livre))
+        emprunt = Emprunt(nom_adherent, prenom_adherent , Livre(titre_livre, auteur_livre))
 
         bibliotheque.ajouter_emprunt(emprunt)
 
-    #### Retour d'un Emprunts
+#### Retour d'un Emprunts
     elif choix == "8":
         nom_user = input("Nom de l'adhérent emprunteur : ")
         prenom_user = input("Prénom de l'adhérent emprunteur : ")
@@ -241,17 +182,11 @@ while True:
 
         bibliotheque.retour_emprunt(nom_adherent, prenom_adherent, titre_livre)
 
-    #### Afficher tous les Emprunts
+#### Afficher tous les Emprunts
     elif choix == "9":
         bibliotheque.afficher_emprunts()
-    elif choix == "0":
-        nomfichier = "./fichier_adh.txt"
-        bibliotheque.sauvegarde_adherent(nomfichier)
-    elif choix.upper() == "L":
-        nomfichier2 = "./fichier_document.txt"
-        bibliotheque.sauvegarder_doc(nomfichier2)
 
-    elif choix == "Q":
+    elif choix == "0":
         print("Au revoir!")
         break
     else:

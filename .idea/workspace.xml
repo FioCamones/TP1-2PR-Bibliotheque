@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3b3e1e6-2c4b-4dd8-b61a-46fe9ffd6fbc" name="Changes" comment="COMMIT 2023/11/30&#10;ajout fichier ...">
+    <list default="true" id="e3b3e1e6-2c4b-4dd8-b61a-46fe9ffd6fbc" name="Changes" comment="COMMIT 2023/11/30 ...&#10;Finale">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TP1-2PY semi finale.py" beforeDir="false" afterPath="$PROJECT_DIR$/TP1-2PY semi finale.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fichier_adh.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fichier_adh.txt" afterDir="false" />
@@ -85,13 +85,22 @@
       <option name="project" value="LOCAL" />
       <updated>1701361773330</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="COMMIT 2023/11/30 ...&#10;Finale">
+      <option name="closed" value="true" />
+      <created>1701365806386</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1701365806386</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="voici le tp mais il manque la partie : diagramme et les fichier externe" />
     <MESSAGE value="COMMIT 2023/11/30" />
     <MESSAGE value="COMMIT 2023/11/30&#10;ajout fichier ..." />
-    <option name="LAST_COMMIT_MESSAGE" value="COMMIT 2023/11/30&#10;ajout fichier ..." />
+    <MESSAGE value="COMMIT 2023/11/30 ...&#10;Finale" />
+    <option name="LAST_COMMIT_MESSAGE" value="COMMIT 2023/11/30 ...&#10;Finale" />
   </component>
 </project>
